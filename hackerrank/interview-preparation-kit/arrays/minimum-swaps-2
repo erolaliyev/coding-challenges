@@ -1,0 +1,30 @@
+function minimumSwaps(arr) {
+    let min_index = 0;
+    let min = arr[0];
+    let swaps = 0;
+    
+    for(let i = 1; i < arr.length; i++) {
+        if(arr[i] < min) {
+            min = arr[i];
+            min_index = i;
+        }
+    }
+    if(min_index != 0) {
+        let temp = arr[0];
+        arr[0] = arr[min_index];
+        arr[min_index] = temp;
+        swaps++;
+    }
+    for(let i = 1; i < arr.length - 1; i++) {
+        let position = arr[i] - arr[0];
+        while(arr[position] != arr[i]) {
+            let temp = arr[position];
+            arr[position] = arr[i];
+            arr[i] = temp;
+            swaps++;
+            position = arr[i] - arr[0];
+        }
+        i = position;
+    }
+    return swaps;
+}
